@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATA_DIR: '$HOME/mosquitto-data'
+      DATA_DIR: 'mosquitto-data'
       LOG_DIR: '$HOME/mosquitto-log'
       CONFIG_DIR: '$HOME/mosquitto-config'
       EXTRA_ARGS: '--volume $config-dir:/mosquitto/config'
@@ -27,7 +27,7 @@ jobs:
           # - { version: '1.6' }
           # - { version: '2.0' }
           # - { version: 'latest'}
-          - { version: "latest", data: '$DATA_DIR'}
+          - { version: "latest", data: '$HOME/$DATA_DIR'}
           # - { version: "latest", log: '$LOG_DIR'}
           # - { version: "latest", EXTRA_ARGS: '$EXTRA_ARGS'}
           # - { version: "latest", data: '$DATA_DIR', log: '$LOG_DIR', extra-args: '$EXTRA_ARGS'}
@@ -46,13 +46,15 @@ jobs:
         run: |
           echo "HOME: $HOME"
           echo $HOME
-          ls $HOME | true
+          ls $HOME
           echo 1
-          ls /home/runner | true
+          ls /home/runner
           echo 2
           echo "DATA_DIR: $DATA_DIR" 
           echo 3
-          ls $DATA_DIR | true
+          echo "HOME/DATA_DIR: $HOME/$DATA_DIR" 
+          echo 4
+          ls $HOME/$DATA_DIR
 
       - name: Check log directory
         if: matrix.log != ''
