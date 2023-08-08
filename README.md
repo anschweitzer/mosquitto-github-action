@@ -51,6 +51,8 @@ Currently, the following parameters are supported:
 | `certificates` | -   | Absolute path to a directory containing certificate files which can be referenced in the config (the folder is mounted under `/mosquitto-certs` in the container) |
 | `config`  | -        | Absolute path to a custom `mosquitto.conf` configuration file to use |
 | `password-file` | -  | Absolute path to a custom `mosquitto.passwd` password file which will be mounted at `/mosquitto/config/mosquitto.passwd` |
+| `data`           | - | Absolute path to a host directory into which /mosquitto/data in the container will be mounted. |
+| `log`           | - | Absolute path to a host directory into which /mosquitto/log in the container will be mounted. |
 | `container-name` | `mosquitto` | The name of the spawned Docker container (can be used as hostname when accessed from other containers) |
 
 All parameters are optional. If no `certificates` are given, no volume is mounted. If no `config` is given, the default Mosquitto config is used.
