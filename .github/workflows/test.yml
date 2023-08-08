@@ -44,8 +44,15 @@ jobs:
       - name: Check data directory
         if: matrix.data != ''
         run: |
-          echo "DATA_DIR: $DATA_DIR"
-          ls $DATA_DIR
+          echo "HOME: $HOME"
+          echo $HOME
+          ls $HOME | true
+          echo 1
+          ls /home/runner | true
+          echo 2
+          echo "DATA_DIR: $DATA_DIR" 
+          echo 3
+          ls $DATA_DIR | true
 
       - name: Check log directory
         if: matrix.log != ''
