@@ -53,6 +53,8 @@ jobs:
           echo 5
           ls /home/runner/mosquitto-config
           echo 6
+          env
+          echo 7
 
 #      - name: Check log directory
 #        if: matrix.log != ''
