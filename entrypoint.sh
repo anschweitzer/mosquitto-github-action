@@ -46,5 +46,15 @@ fi
 
 docker_run="$docker_run eclipse-mosquitto:$VERSION"
 
+echo "1 $VERSION"
+echo "2 $PORTS"
+echo "3 $CERTIFICATES"
+echo "4 $CONFIG"
+echo "5 $PASSWORD_FILE"
+echo "6 $DATA"
+echo "7 $LOG"
+echo "8 $EXTRA_ARGS"
+echo "9 $CONTAINERNAME"
+
 echo "$docker_run"
 sh -c "$docker_run"
