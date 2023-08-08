@@ -5,7 +5,10 @@ PORTS=$2
 CERTIFICATES=$3
 CONFIG=$4
 PASSWORD_FILE=$5
-CONTAINERNAME=$6
+DATA=$6
+LOG=$7
+EXTRA_ARGS=$8
+CONTAINERNAME=$9
 
 echo "Certificates: $CERTIFICATES"
 echo "Config: $CONFIG"
@@ -27,6 +30,18 @@ fi
 
 if [ -n "$PASSWORD_FILE" ]; then
   docker_run="$docker_run --volume $PASSWORD_FILE:/mosquitto/config/mosquitto.passwd:ro"
+fi
+
+if [ -n "$DATA" ]; then
+  docker_run="$docker_run --volume $DATA:/mosquitto/data"
+fi
+
+if [ -n "$LOG" ]; then
+  docker_run="$docker_run --volume $LOG:/mosquitto/log"
+fi
+
+if [ -n "$EXTRA_ARGS" ]; then
+  docker_run="$docker_run $EXTRA_ARGS"
 fi
 
 docker_run="$docker_run eclipse-mosquitto:$VERSION"

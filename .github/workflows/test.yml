@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - ci
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -13,10 +14,24 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      data-dir: '$HOME/mosquitto-data'
+      log-dir: '$HOME/mosquitto-log'
+      config-dir: '$HOME/mosquitto-config'
+      extra-args: '--volume $config-dir:/mosquitto/config'
+
     strategy:
       matrix:
-        version: ['1.5', '1.6', '2.0', 'latest']
-
+        include:
+          # - { version: '1.5' }
+          # - { version: '1.6' }
+          # - { version: '2.0' }
+          # - { version: 'latest'}
+          # - { version: "latest", data: '$data-dir'}
+          - { version: "latest", log: '$log-dir'}
+          - { version: "latest", extra-args: '$extra-args'}
+          - { version: "latest", data: '$data-dir', log: '$log-dir', extra-args: 'extra-args'}
+          -
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,3 +40,22 @@ jobs:
         uses: ./
         with:
           version: ${{ matrix.version }}
+
+      - name: Check data directory
+        if: matrix.data != ''
+        run: |
+          echo "data-dir: $data-dir"
+          ls $data-dir
+
+      - name: Check log directory
+        if: matrix.log != ''
+        run: |
+          echo "log-dir: log-dir"
+          ls log-dir
+
+      - name: Check extra args via config directory
+        if: matrix.extra-args != ''
+        run: |
+          echo "config-dir: config-dir"
+          ls config-dir
+          
