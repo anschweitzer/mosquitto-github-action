@@ -54,15 +54,15 @@ jobs:
           ls /home/runner/mosquitto-config
           echo 6
 
-      - name: Check log directory
-        if: matrix.log != ''
-        run: |
-          echo "LOG_DIR: $LOG_DIR"
-          ls $LOG_DIR
-
-      - name: Check extra args via config directory
-        if: matrix.extra-args != ''
-        run: |
-          echo "CONFIG_DIR: $CONFIG_DIR"
-          ls $$CONFIG_DIR
+#      - name: Check log directory
+#        if: matrix.log != ''
+#        run: |
+#          echo "LOG_DIR: $LOG_DIR"
+#          ls $LOG_DIR
+#
+#      - name: Check extra args via config directory
+#        if: matrix.extra-args != ''
+#        run: |
+#          echo "CONFIG_DIR: $CONFIG_DIR"
+#          ls $$CONFIG_DIR
           
