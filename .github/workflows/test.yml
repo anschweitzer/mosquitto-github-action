@@ -14,12 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      DATA_DIR: 'mosquitto-data'
-      LOG_DIR: 'mosquitto-log'
-      CONFIG_DIR: 'mosquitto-config'
-      EXTRA_ARGS: '--volume $config-dir:/mosquitto/config'
-
     strategy:
       matrix:
         include:
@@ -30,7 +24,11 @@ jobs:
           # - { version: "latest", data: '/home/runner/mosquitto-data'}
           # - { version: "latest", log: '/home/runner/mosquitto-log'}
           # - { version: "latest", EXTRA_ARGS: '--volume /home/runner/mosquitto-config:/mosquitto/config'}
-          - { version: "latest", data: '/home/runner/mosquitto-data', log: '/home/runner/mosquitto-log', extra-args: '--volume /home/runner/mosquitto-config:/mosquitto/config'}
+          - { version: "latest",
+              data: '/home/runner/mosquitto-data',
+              log: '/home/runner/mosquitto-log',
+              extra-args: '--volume /home/runner/mosquitto-config:/mosquitto/config'
+          }
 
     steps:
       - name: Checkout

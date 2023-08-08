@@ -52,5 +52,5 @@ runs:
     - ${{ inputs.password-file }}
     - ${{ inputs.data }}
     - ${{ inputs.log }}
-    - ${{ inputs.exrta-args }}
+    - ${{ inputs.extra-args }}
     - ${{ inputs.container-name }}
