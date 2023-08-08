@@ -29,6 +29,14 @@ if [ -n "$PASSWORD_FILE" ]; then
   docker_run="$docker_run --volume $PASSWORD_FILE:/mosquitto/config/mosquitto.passwd:ro"
 fi
 
+if [ -n "$DATA" ]; then
+  docker_run="$docker_run --volume $DATA:/mosquitto/data"
+fi
+
+if [ -n "$LOG" ]; then
+  docker_run="$docker_run --volume $LOG:/mosquitto/log"
+fi
+
 docker_run="$docker_run eclipse-mosquitto:$VERSION"
 
 echo "$docker_run"
