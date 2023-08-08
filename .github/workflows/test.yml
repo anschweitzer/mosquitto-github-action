@@ -31,7 +31,7 @@ jobs:
           - { version: "latest", log: '$log-dir'}
           - { version: "latest", extra-args: '$extra-args'}
           - { version: "latest", data: '$data-dir', log: '$log-dir', extra-args: 'extra-args'}
-          -
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
