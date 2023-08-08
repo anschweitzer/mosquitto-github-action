@@ -27,10 +27,10 @@ jobs:
           # - { version: '1.6' }
           # - { version: '2.0' }
           # - { version: 'latest'}
-          # - { version: "latest", data: '$data-dir'}
-          - { version: "latest", log: '$log-dir'}
-          - { version: "latest", extra-args: '$extra-args'}
-          - { version: "latest", data: '$data-dir', log: '$log-dir', extra-args: 'extra-args'}
+          - { version: "latest", data: '$data-dir'}
+          # - { version: "latest", log: '$log-dir'}
+          # - { version: "latest", extra-args: '$extra-args'}
+          # - { version: "latest", data: '$data-dir', log: '$log-dir', extra-args: 'extra-args'}
 
     steps:
       - name: Checkout
@@ -50,12 +50,12 @@ jobs:
       - name: Check log directory
         if: matrix.log != ''
         run: |
-          echo "log-dir: log-dir"
-          ls log-dir
+          echo "log-dir: $log-dir"
+          ls $log-dir
 
       - name: Check extra args via config directory
         if: matrix.extra-args != ''
         run: |
-          echo "config-dir: config-dir"
-          ls config-dir
+          echo "config-dir: $config-dir"
+          ls $config-dir
           
