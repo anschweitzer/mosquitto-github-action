@@ -16,8 +16,8 @@ jobs:
 
     env:
       DATA_DIR: 'mosquitto-data'
-      LOG_DIR: '${{ HOME }}/mosquitto-log'
-      CONFIG_DIR: '${{ HOME }}/mosquitto-config'
+      LOG_DIR: 'mosquitto-log'
+      CONFIG_DIR: 'mosquitto-config'
       EXTRA_ARGS: '--volume $config-dir:/mosquitto/config'
 
     strategy:
