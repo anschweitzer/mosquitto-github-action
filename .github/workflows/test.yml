@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      FOO: ${{ github.workspace }}
       DATA_DIR: 'mosquitto-data'
       LOG_DIR: 'mosquitto-log'
       CONFIG_DIR: 'mosquitto-config'
@@ -28,10 +27,10 @@ jobs:
           # - { version: '1.6' }
           # - { version: '2.0' }
           # - { version: 'latest'}
-          - { version: "latest", data: '/home/runner/mosquitto-data'}
+          # - { version: "latest", data: '/home/runner/mosquitto-data'}
           # - { version: "latest", log: '/home/runner/mosquitto-log'}
           # - { version: "latest", EXTRA_ARGS: '--volume /home/runner/mosquitto-config:/mosquitto/config'}
-          # - { version: "latest", data: '/home/runner/mosquitto-data', log: '/home/runner/mosquitto-log', extra-args: '--volume /home/runner/mosquitto-config:/mosquitto/config'}
+          - { version: "latest", data: '/home/runner/mosquitto-data', log: '/home/runner/mosquitto-log', extra-args: '--volume /home/runner/mosquitto-config:/mosquitto/config'}
 
     steps:
       - name: Checkout
@@ -48,18 +47,14 @@ jobs:
       - name: Check data directory
         if: matrix.data != ''
         run: |
-          echo "FOO: $FOO"
-          ls $FOO
-          echo "HOME: $HOME"
-          echo $HOME
-          ls $HOME
-          echo 1
-          ls /home/runner
-          echo 2
-          echo "DATA_DIR: /home/runner/mosquitto-data" 
+          ls -l /home/runner
           echo 3
           ls /home/runner/mosquitto-data
           echo 4
+          ls /home/runner/mosquitto-log
+          echo 5
+          ls /home/runner/mosquitto-config
+          echo 6
 
       - name: Check log directory
         if: matrix.log != ''
