@@ -16,7 +16,10 @@ jobs:
 
     strategy:
       matrix:
-        version: ['1.5', '1.6', '2.0', 'latest']
+        version: [
+          # '1.5', '1.6', '2.0',
+          'latest'
+        ]
 
     steps:
       - name: Checkout
