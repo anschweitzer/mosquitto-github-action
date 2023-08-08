@@ -39,6 +39,9 @@ jobs:
       - name: Start Mosquitto
         uses: ./
         with:
+          data: ${{ matrix.data }}
+          log: ${{ matrix.log }}
+          extra-args: ${{ matrix.extra-args }}
           version: ${{ matrix.version }}
 
       - name: Check data directory
