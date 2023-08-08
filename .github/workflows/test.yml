@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      data-dir: '$HOME/mosquitto-data'
-      log-dir: '$HOME/mosquitto-log'
-      config-dir: '$HOME/mosquitto-config'
-      extra-args: '--volume $config-dir:/mosquitto/config'
+      DATA_DIR: '$HOME/mosquitto-data'
+      LOG_DIR: '$HOME/mosquitto-log'
+      CONFIG_DIR: '$HOME/mosquitto-config'
+      EXTRA_ARGS: '--volume $config-dir:/mosquitto/config'
 
     strategy:
       matrix:
@@ -27,10 +27,10 @@ jobs:
           # - { version: '1.6' }
           # - { version: '2.0' }
           # - { version: 'latest'}
-          - { version: "latest", data: '$data-dir'}
-          # - { version: "latest", log: '$log-dir'}
-          # - { version: "latest", extra-args: '$extra-args'}
-          # - { version: "latest", data: '$data-dir', log: '$log-dir', extra-args: 'extra-args'}
+          - { version: "latest", data: '$DATA_DIR'}
+          # - { version: "latest", log: '$LOG_DIR'}
+          # - { version: "latest", EXTRA_ARGS: '$EXTRA_ARGS'}
+          # - { version: "latest", data: '$DATA_DIR', log: '$LOG_DIR', extra-args: '$EXTRA_ARGS'}
 
     steps:
       - name: Checkout
@@ -44,18 +44,18 @@ jobs:
       - name: Check data directory
         if: matrix.data != ''
         run: |
-          echo "data-dir: $data-dir"
-          ls $data-dir
+          echo "DATA_DIR: $DATA_DIR"
+          ls $DATA_DIR
 
       - name: Check log directory
         if: matrix.log != ''
         run: |
-          echo "log-dir: $log-dir"
-          ls $log-dir
+          echo "LOG_DIR: $LOG_DIR"
+          ls $LOG_DIR
 
       - name: Check extra args via config directory
         if: matrix.extra-args != ''
         run: |
-          echo "config-dir: $config-dir"
-          ls $config-dir
+          echo "CONFIG_DIR: $CONFIG_DIR"
+          ls $$CONFIG_DIR
           
