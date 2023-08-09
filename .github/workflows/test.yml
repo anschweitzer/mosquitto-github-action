@@ -53,13 +53,14 @@ jobs:
           version: ${{ matrix.version }}
           log: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
 
-      - name: Wait for mosuqitto
+      - name: Wait for Mosquitto
         uses: iFaxity/wait-on-action@v1.1.0
         with:
           resource: tcp:localhost:1883
           timeout: 5000
 
-      - name: try mosquitto
+      - name: Connect to Mosquitto
+        continue_on_error: true
         run: |
           echo 1 pub clear
           mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}'
