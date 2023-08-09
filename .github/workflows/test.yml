@@ -47,12 +47,13 @@ jobs:
 #          sudo apt-get update
 #          sudo apt-get install mosquitto-clients
 
-      
+
 
       - name: Start Mosquitto
         uses: ./
         with:
           version: ${{ matrix.version }}
+          config: ${{ github.workspace }}/test-data/mosquitto-log.conf
           log: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
           data: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data
 
@@ -76,6 +77,7 @@ jobs:
           which docker
           docker --version
           docker ps
+          docker logs mosquitto
 #          echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
 #          echo 1
 #          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto

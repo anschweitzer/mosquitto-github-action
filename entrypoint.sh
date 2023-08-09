@@ -24,7 +24,7 @@ if [ -n "$CERTIFICATES" ]; then
 fi
 
 if [ -n "$CONFIG" ]; then
-  docker_run="$docker_run --volume $CONFIG:/mosquitto/config/mosquitto.conf:ro"
+  docker_run="$docker_run --volume $CONFIG:/mosquitto/config/mosquitto.conf:rw"
 fi
 
 if [ -n "$PASSWORD_FILE" ]; then
