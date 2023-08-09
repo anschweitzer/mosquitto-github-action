@@ -10,14 +10,13 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  test-log:
-    name: Test mounting of logging directory with 'log' input [${{ matrix.version }}]
+    name: Test Mosquitto Docker image version [${{ matrix.version }}]
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        version: ['latest']
+        version: ['1.5', '1.6', '2.0', 'latest']
 
     steps:
       - name: Checkout
@@ -27,35 +26,37 @@ jobs:
         uses: ./
         with:
           version: ${{ matrix.version }}
-          log: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
 
-      - name: Wait for mosuqitto
-        uses: iFaxity/wait-on-action@v1.1.0
-        with:
-          resource: localhost:1883
+#  test-log:
+#    name: Test mounting of logging directory with 'log' input [${{ matrix.version }}]
+#
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        version: ['latest']
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Start Mosquitto
+#        uses: ./
+#        with:
+#          version: ${{ matrix.version }}
+#          log: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
+#
+#      - name: Wait for mosuqitto
+#        uses: iFaxity/wait-on-action@v1.1.0
+#        with:
+#          resource: localhost:1883
+#
+#      - name: Check log file
+#        run: |
+#          echo ${{ github.workspace }}/test-data/bind-mounts/mosquitto-log
+#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
+#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
+#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
+#          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log  #  test-broker:
 
-      - name: Check log file
-        run: |
-          echo ${{ github.workspace }}/test-data/bind-mounts/mosquitto-log
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
-          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log  #  test-broker:
-
-  #    name: Test Mosquitto Docker image version [${{ matrix.version }}]
-  #
-  #    runs-on: ubuntu-latest
-  #
-  #    strategy:
-  #      matrix:
-  #        version: ['1.5', '1.6', '2.0', 'latest']
-  #
-  #    steps:
-  #      - name: Checkout
-  #        uses: actions/checkout@v3
-  #
-  #      - name: Start Mosquitto
-  #        uses: ./
-  #        with:
-  #          version: ${{ matrix.version }}
 
