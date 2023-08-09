@@ -59,19 +59,17 @@ jobs:
         with:
           resource: tcp:localhost:1883
           timeout: 5000
-        continue-on-error: true
 
       - name: Connect to Mosquitto
         continue-on-error: true
         run: |
           echo 1 pub clear
-          mosquitto_pub -h 0.0.0.0 -p 1883 -t foo -m '{"bla":1}'
+          mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}' | true
           echo 2 sub clear
-          mosquitto_sub -h 0.0.0.0 -p 1883 -t foo -E
+          mosquitto_sub -h localhost -p 1883 -t foo -E | true
           echo 3
 
       - name: Check log file
-        continue-on-error: true
         run: |
           echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
           echo 1
@@ -79,12 +77,12 @@ jobs:
           echo 2
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
           echo 3
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
           echo 4
-          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
+          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
           echo 5
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/log
-          echo 6
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data | true
           echo 7
+          docker ps | true
+          echo 8
 
