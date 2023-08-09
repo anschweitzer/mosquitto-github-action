@@ -24,7 +24,7 @@ if [ -n "$CERTIFICATES" ]; then
 fi
 
 if [ -n "$CONFIG" ]; then
-  docker_run="$docker_run --volume $CONFIG:/mosquitto/config/mosquitto.conf:rw"
+  docker_run="$docker_run --volume $CONFIG:/mosquitto/config/mosquitto.conf"
 fi
 
 if [ -n "$PASSWORD_FILE" ]; then
@@ -32,11 +32,11 @@ if [ -n "$PASSWORD_FILE" ]; then
 fi
 
 if [ -n "$DATA" ]; then
-  docker_run="$docker_run --volume $DATA:/mosquitto/data:Z"
+  docker_run="$docker_run --volume $DATA:/mosquitto/data"
 fi
 
 if [ -n "$LOG" ]; then
-  docker_run="$docker_run --volume $LOG:/mosquitto/log:Z"
+  docker_run="$docker_run --volume $LOG:/mosquitto/log"
 fi
 
 docker_run="$docker_run eclipse-mosquitto:$VERSION"

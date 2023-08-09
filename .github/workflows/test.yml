@@ -76,18 +76,22 @@ jobs:
           docker --version
           docker ps
           docker logs mosquitto
-#          echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
-#          echo 1
-#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
-#          echo 2
-#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
-#          echo 3
-#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
-#          echo 4
-#          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
-#          echo 5
-#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data | true
-#          echo 7
-#          docker ps | true
-#          echo 8
+          echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
+          echo 1
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
+          echo 2
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
+          echo 3
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
+          echo 4
+          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
+          echo 5
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data | true
+          echo 7
+          docker ps | true
+          echo 8
 
+      - name: Mosquitto Log
+        if: always()
+        run: |
+          docker logs mosquitto
