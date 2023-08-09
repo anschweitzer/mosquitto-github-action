@@ -48,7 +48,7 @@ jobs:
           log: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
 
       - name: Wait for mosuqitto
-        uses: iFaxity/wait-on-action
+        uses: iFaxity/wait-on-action@v1.1.0
         with:
           resource: localhost:1883
 
