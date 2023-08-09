@@ -51,16 +51,16 @@ jobs:
         uses: iFaxity/wait-on-action@v1.1.0
         continue-on-error: true
         with:
-          resource: tcp://localhost:1883
+          resource: tcp:localhost:1883
           timeout: 5000
           verbose: true
 
       - name: Check log file
         run: |
-          echo ${{ github.workspace }}/test-data/bind-mounts/mosquitto-log
+          echo ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
-          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log  #  test-broker:
+          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
 
 
