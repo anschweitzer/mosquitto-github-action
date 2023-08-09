@@ -41,6 +41,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install mosquitto client
+        run: |
+          sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
+          sudo apt-get update
+          sudo apt-get install mosquitto-clients
+
       - name: Start Mosquitto
         uses: ./
         with:
@@ -49,18 +55,29 @@ jobs:
 
       - name: Wait for mosuqitto
         uses: iFaxity/wait-on-action@v1.1.0
-        continue-on-error: true
         with:
           resource: tcp:localhost:1883
           timeout: 5000
-          verbose: true
+
+      - name: try mosquitto
+        run: |
+          echo 1 pub clear
+          mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}'
+          echo 2 sub clear
+          mosquitto_sub -h localhost -p 1883 -t foo -E
+          echo 3
 
       - name: Check log file
         run: |
-          echo ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
+          echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
+          echo 1
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
+          echo 2
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
+          echo 3
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
+          echo 4
           cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
-
+          echo 5
+          
 
