@@ -49,9 +49,11 @@ jobs:
 
       - name: Wait for mosuqitto
         uses: iFaxity/wait-on-action@v1.1.0
+        continue-on-error: true
         with:
           resource: tcp://localhost:1883
-          timeout: 30000
+          timeout: 5000
+          verbose: true
 
       - name: Check log file
         run: |
