@@ -41,11 +41,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install mosquitto client
-        run: |
-          sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
-          sudo apt-get update
-          sudo apt-get install mosquitto-clients
+#      - name: Install mosquitto client
+#        run: |
+#          sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
+#          sudo apt-get update
+#          sudo apt-get install mosquitto-clients
 
       - name: Start Mosquitto
         uses: ./
@@ -60,29 +60,32 @@ jobs:
           resource: tcp:localhost:1883
           timeout: 5000
 
-      - name: Connect to Mosquitto
-        continue-on-error: true
-        run: |
-          echo 1 pub clear
-          mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}'
-          echo 2 sub clear
-          mosquitto_sub -h localhost -p 1883 -t foo -E
-          echo 3
+#      - name: Connect to Mosquitto
+#        continue-on-error: true
+#        run: |
+#          echo 1 pub clear
+#          mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}'
+#          echo 2 sub clear
+#          mosquitto_sub -h localhost -p 1883 -t foo -E
+#          echo 3
 
       - name: Check log file
         run: |
-          echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
-          echo 1
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
-          echo 2
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
-          echo 3
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
-          echo 4
-          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
-          echo 5
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data | true
-          echo 7
-          docker ps | true
-          echo 8
+          which docker
+          docker --version
+          docker ps
+#          echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
+#          echo 1
+#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
+#          echo 2
+#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
+#          echo 3
+#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
+#          echo 4
+#          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
+#          echo 5
+#          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data | true
+#          echo 7
+#          docker ps | true
+#          echo 8
 
