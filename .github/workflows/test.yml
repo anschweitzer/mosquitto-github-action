@@ -64,9 +64,9 @@ jobs:
         continue-on-error: true
         run: |
           echo 1 pub clear
-          mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}' | true
+          mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}'
           echo 2 sub clear
-          mosquitto_sub -h localhost -p 1883 -t foo -E | true
+          mosquitto_sub -h localhost -p 1883 -t foo -E
           echo 3
 
       - name: Check log file
