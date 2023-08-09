@@ -10,24 +10,6 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-#  test-broker:
-#    name: Test Mosquitto Docker image version [${{ matrix.version }}]
-#
-#    runs-on: ubuntu-latest
-#
-#    strategy:
-#      matrix:
-#        version: ['1.5', '1.6', '2.0', 'latest']
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - name: Start Mosquitto
-#        uses: ./
-#        with:
-#          version: ${{ matrix.version }}
-
   test-log:
     name: Test mounting of logging directory with 'log' input [${{ matrix.version }}]
 
@@ -58,4 +40,22 @@ jobs:
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
-          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
+          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log  #  test-broker:
+
+  #    name: Test Mosquitto Docker image version [${{ matrix.version }}]
+  #
+  #    runs-on: ubuntu-latest
+  #
+  #    strategy:
+  #      matrix:
+  #        version: ['1.5', '1.6', '2.0', 'latest']
+  #
+  #    steps:
+  #      - name: Checkout
+  #        uses: actions/checkout@v3
+  #
+  #      - name: Start Mosquitto
+  #        uses: ./
+  #        with:
+  #          version: ${{ matrix.version }}
+
