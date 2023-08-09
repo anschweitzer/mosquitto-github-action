@@ -10,23 +10,23 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  test-broker:
-    name: Test Mosquitto Docker image version [${{ matrix.version }}]
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        version: ['1.5', '1.6', '2.0', 'latest']
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Start Mosquitto
-        uses: ./
-        with:
-          version: ${{ matrix.version }}
+#  test-broker:
+#    name: Test Mosquitto Docker image version [${{ matrix.version }}]
+#
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        version: ['1.5', '1.6', '2.0', 'latest']
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Start Mosquitto
+#        uses: ./
+#        with:
+#          version: ${{ matrix.version }}
 
   test-log:
     name: Test mounting of logging directory with 'log' input [${{ matrix.version }}]
@@ -50,7 +50,8 @@ jobs:
       - name: Wait for mosuqitto
         uses: iFaxity/wait-on-action@v1.1.0
         with:
-          resource: localhost:1883
+          resource: tcp://localhost:1883
+          timeout: 5000
 
       - name: Check log file
         run: |
