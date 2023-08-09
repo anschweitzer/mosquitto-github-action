@@ -60,7 +60,7 @@ jobs:
           timeout: 5000
 
       - name: Connect to Mosquitto
-        continue_on_error: true
+        continue-on-error: true
         run: |
           echo 1 pub clear
           mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}'
