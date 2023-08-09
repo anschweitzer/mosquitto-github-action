@@ -52,6 +52,7 @@ jobs:
         with:
           version: ${{ matrix.version }}
           log: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
+          data: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data
 
       - name: Wait for Mosquitto
         uses: iFaxity/wait-on-action@v1.1.0
@@ -64,9 +65,9 @@ jobs:
         continue-on-error: true
         run: |
           echo 1 pub clear
-          mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}'
+          mosquitto_pub -h 0.0.0.0 -p 1883 -t foo -m '{"bla":1}'
           echo 2 sub clear
-          mosquitto_sub -h localhost -p 1883 -t foo -E
+          mosquitto_sub -h 0.0.0.0 -p 1883 -t foo -E
           echo 3
 
       - name: Check log file
@@ -84,5 +85,6 @@ jobs:
           echo 5
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/log
           echo 6
-          
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data
+          echo 7
 
