@@ -36,7 +36,7 @@ if [ -n "$DATA" ]; then
 fi
 
 if [ -n "$LOG" ]; then
-  docker_run="$docker_run --volume $LOG:/mosquitto"
+  docker_run="$docker_run --volume $LOG:/mosquitto/log"
 fi
 
 docker_run="$docker_run eclipse-mosquitto:$VERSION"

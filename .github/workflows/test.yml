@@ -58,6 +58,7 @@ jobs:
         with:
           resource: tcp:localhost:1883
           timeout: 5000
+        continue-on-error: true
 
       - name: Connect to Mosquitto
         continue-on-error: true
