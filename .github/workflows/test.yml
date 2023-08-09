@@ -69,6 +69,7 @@ jobs:
           echo 3
 
       - name: Check log file
+        continue-on-error: true
         run: |
           echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
           echo 1
@@ -80,5 +81,7 @@ jobs:
           echo 4
           cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
           echo 5
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/log
+          echo 6
           
 
