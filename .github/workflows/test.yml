@@ -51,8 +51,8 @@ jobs:
 
       - name: Install mosquitto client
         run: |
-          sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
-          sudo apt-get update
+          # sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
+          # sudo apt-get update
           sudo apt-get install mosquitto-clients
 
       - name: Wait for Mosquitto
