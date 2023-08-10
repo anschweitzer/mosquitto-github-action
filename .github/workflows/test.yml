@@ -72,14 +72,14 @@ jobs:
           echo return code: $?
       - name: Check log file
         run: |
-          echo "mosquitto:   ${{ github.workspace }}/test-data/bind-mounts/mosquitto:"
+          echo "mosquitto:   ${{ github.workspace }}/test-data/bind-mounts/mosquitto"
           ls -al ${{ github.workspace }}/test-data/bind-mounts/mosquitto
-          echo "log:         ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log:"
+          echo "log:         ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log"
           ls -al ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
-          echo "log file:    ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log:"
+          echo "log file:    ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log"
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
-          echo "catlog file: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log:"
-          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
+          echo "cat log file: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log"
+          sudo cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
 
       - name: Mosquitto Log
         if: always()
