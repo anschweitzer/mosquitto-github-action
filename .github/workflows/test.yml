@@ -71,7 +71,7 @@ jobs:
           mosquitto_sub -h localhost -p 1883 -t foo -E
           echo return code: $?
 
-      - name: Check log file
+      - name: Check Log File
         run: |
           echo "mosquitto:   ${{ github.workspace }}/test-data/bind-mounts/mosquitto"
           ls -al ${{ github.workspace }}/test-data/bind-mounts/mosquitto
@@ -81,6 +81,11 @@ jobs:
           ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
           echo "cat log file: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log"
           sudo cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
+
+      - name: Check Config Directory
+        run: |            
+          echo "config:       ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data"
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data
 
       - name: Mosquitto Log
         if: always()
