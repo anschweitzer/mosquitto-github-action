@@ -64,32 +64,22 @@ jobs:
       - name: Connect to Mosquitto
         continue-on-error: true
         run: |
-          echo 1 pub clear
+          echo pub clear: 
           mosquitto_pub -h localhost -p 1883 -t foo -m '{"bla":1}'
-          echo 2 sub clear
+          echo return code: $?
+          echo sub clear:
           mosquitto_sub -h localhost -p 1883 -t foo -E
-          echo 3
-
+          echo return code: $?
       - name: Check log file
         run: |
-          which docker
-          docker --version
-          docker ps
-          docker logs mosquitto
-          echo "Log directory: <${{ github.workspace }}/test-data/bind-mounts/mosquitto/log>"
-          echo 1
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto
-          echo 2
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
-          echo 3
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
-          echo 4
-          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log | true
-          echo 5
-          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/data | true
-          echo 7
-          docker ps | true
-          echo 8
+          echo "mosquitto:   ${{ github.workspace }}/test-data/bind-mounts/mosquitto:"
+          ls -al ${{ github.workspace }}/test-data/bind-mounts/mosquitto
+          echo "log:         ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log:"
+          ls -al ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log
+          echo "log file:    ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log:"
+          ls -l ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
+          echo "catlog file: ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log:"
+          cat ${{ github.workspace }}/test-data/bind-mounts/mosquitto/log/mosquitto.log
 
       - name: Mosquitto Log
         if: always()
